@@ -1,9 +1,0 @@
-/out:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\intermediate\SgGenerated\\"
-/int:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\intermediate\\"
-/ref:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\intermediate\PreMergeILTransformed\\"
-/ref:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\in\\"
-/ref:"C:\Program Files (x86)\MSBuild\Microsoft\.NetNative\x64\ilc\lib\Private\\"
-/ref:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\in\\"
-/ref:"C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\in\WinMetadata\\"
-/ca:System.Private.CoreLib
-"@C:\DotNetProjects\DPI_Batch\DPI_Batch\obj\x64\Debug\ilc\intermediate\PreMergeILTransformed\ComputedSerializationInput.txt"
