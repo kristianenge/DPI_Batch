@@ -1,0 +1,10 @@
+C:\DotNetProjects\DPI_Batch\BatchModel\bin\Debug\BatchModel.dll
+C:\DotNetProjects\DPI_Batch\BatchModel\bin\Debug\BatchModel.pdb
+C:\DotNetProjects\DPI_Batch\BatchModel\obj\Debug\BatchModel.csprojResolveAssemblyReference.cache
+C:\DotNetProjects\DPI_Batch\BatchModel\obj\Debug\BatchModel.dll
+C:\DotNetProjects\DPI_Batch\BatchModel\obj\Debug\BatchModel.pdb
+Z:\Development\DPI_Batch\BatchModel\bin\Debug\BatchModel.dll
+Z:\Development\DPI_Batch\BatchModel\bin\Debug\BatchModel.pdb
+Z:\Development\DPI_Batch\BatchModel\obj\Debug\BatchModel.csprojResolveAssemblyReference.cache
+Z:\Development\DPI_Batch\BatchModel\obj\Debug\BatchModel.dll
+Z:\Development\DPI_Batch\BatchModel\obj\Debug\BatchModel.pdb

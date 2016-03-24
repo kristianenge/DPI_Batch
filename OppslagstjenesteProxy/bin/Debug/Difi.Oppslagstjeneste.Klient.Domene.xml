@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Difi.Oppslagstjeneste.Klient.Domene</name>
+    </assembly>
+    <members>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.EndringsInfo.SistOppdatert">
+            <summary>
+                Dato for når et objekt sist ble endret
+            </summary>
+            <remarks>
+                SistOppdatert blir brukt i forskjellige objektet, i de objekter det er en del av definerer feltet når objektet sist
+                ble endret. Det gir ingen informasjon om hvilken endring som da ble utført.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.EndringsInfo.SistVerifisert">
+            <summary>
+                Dato for når et objekt sist ble verifisert gyldig.
+            </summary>
+            <remarks>
+                Feltet definerer når objektet sist ble verifisert/bekreftet. F.eks for mobiltelefonnummer betyr dette at en SMS er
+                sendt til mobilnummeret og smsen er bekreftet mottatt av Person.
+            </remarks>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov">
+            <summary>
+                Beskriver det opplysningskrav som en Virksomhet har definert.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov.Person">
+            <summary>
+                Person gir kun informasjon om Personen finnes i registeret og reservasjonsstatus. Person er implisitt og returneres
+                alltid.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov.Kontaktinfo">
+            <summary>
+                Kontaktinfo gir informasjon om Person og Personers kontaktinformajon.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov.Sertifikat">
+            <summary>
+                Sertifikat gir informasjon om Person sitt sertifikat som skal brukes i forbindelse med kryptering av Sikker Digital
+                Post.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov.SikkerDigitalPost">
+            <summary>
+                SikkerDigitalPost gir informasjon om Person, postkasse og postkasseleverandøren.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Informasjonsbehov.VarslingsStatus">
+            <summary>
+                Varslingsstatus gir en tekstlig beskrivelse av om bruker har utgått kontaktinformasjon eller ikke, ihht
+                eForvaltningsforskriftens §32 andre ledd.
+            </summary>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Status">
+            <summary>
+                For oppslag av Person(er) er alle statuskoder relevante. For oppslag på endringer er kun status AKTIV og SLETTET
+                relevant.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Status.AKTIV">
+            <summary>
+                Person finnes i registeret.
+            </summary>
+            <remarks>
+                Ved AKTIV levers alle felter på Person ut, samt den øvrige informasjonen spesifisert i informasjonsbehovet dersom
+                denne informasjonen finnes i registeret.
+            </remarks>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Status.SLETTET">
+            <summary>
+                Person er slettet fra registeret.
+            </summary>
+            <remarks>
+                Ved SLETTET og IKKE_REGISTRERT har ikke registeret informasjon om Kontaktinfo eller PostkasseInfo eller Sertifikat,
+                og vil ikke kunne levere ut disse elementene selv om
+                det er spesifisert i informasjonsbehov fra Offentlig virksomhet.
+            </remarks>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Status.IKKE_REGISTRERT">
+            <summary>
+                Person finnes ikke i registeret.
+            </summary>
+            <remarks>
+                Ved SLETTET og IKKE_REGISTRERT har ikke registeret informasjon om Kontaktinfo eller PostkasseInfo eller Sertifikat,
+                og vil ikke kunne levere ut disse elementene selv om
+                det er spesifisert i informasjonsbehov fra Offentlig virksomhet.
+            </remarks>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Varslingsstatus">
+            <summary>
+                Varslingsstatus gir en tekstlig beskrivelse av om bruker har utgått kontaktinformasjon eller ikke, ihht
+                eForvaltningsforskriftens §32 andre ledd.
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Varslingsstatus.KAN_IKKE_VARSLES">
+            <remarks>Person har utgått kontaktinformasjon, er reservert, er slettet eller finnes ikke i registeret</remarks>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums.Varslingsstatus.KAN_VARSLES">
+            <remarks>Person har ikke utgått kontaktinformasjon</remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Epostadresse.Epost">
+            <summary>
+                Adresse til en elektronisk postkasse på Internett
+            </summary>
+            <remarks>
+                •En tekststreng på formatet “^[\\w-\\](?:\\.[\\w-\\])*@(?:[\\w-]\.)[a-zA-Z]{2,7}$”
+                •Klassifikasjon er Open Web Application Security Project (OWASP): Regulære uttrykk for validering
+            </remarks>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.EndringerSvar">
+            <summary>
+                Response sendt fra Oppslagstjensten for å levere ut endringer fra kontakt og reservasjonsregisteret til Virksomhet
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.EndringerSvar.FraEndringsNummer">
+            <summary>
+                Et endringsNummer, et nummer som identifiserer en endring i et register.
+            </summary>
+            <remarks>
+                Enhver endring i Oppslagstjenesten tilordnes ett løpenummer som øker med en (1) for hver endring. Dette brukes for
+                at virksomheter som vedlikeholder
+                lokale kopier av registeret enkelt skal ha sporbarhet på alle endringer.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.EndringerSvar.TilEndringsNummer">
+            <summary>
+                Et endringsNummer, et nummer som identifiserer en endring i et register. Dersom TilEndringsNummer er ulik fra
+                SenesteEndringsNummer så bør Offentlig Virksomhet sende ny HentEndringer forespørsel
+            </summary>
+            <remarks>
+                Dersom TilEndringsNummer og SenesteEndringsNummer er lik finnes det ikke fler endringer i registeret som ikke er
+                utlevert.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.EndringerSvar.SenesteEndringsNummer">
+            <summary>
+                Beskriver siste endringsnummer i et register. Kan sammenlignes med tilEndringsNummer for å vite om det finnes flere
+                endringer i registeret.
+            </summary>
+            <remarks>
+                Dersom TilEndringsNummer og SenesteEndringsNummer er lik finnes det ikke fler endringer i registeret som ikke er
+                utlevert.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.EndringerSvar.Personer">
+            <summary>
+                Person er en Innbygger utlevert fra kontakt og reservasjonsregisteret.
+            </summary>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.PrintSertifikatSvar">
+            <summary>
+                Svar fra Oppslagstjeneste som inneholder sertifikat til printleverandør og adressen til leverandøren
+                av postkassetjenesten.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.PrintSertifikatSvar.Printsertifikat" -->
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Svar.PrintSertifikatSvar.PostkasseleverandørAdresse">
+            <summary>
+                Adresse til en leverandør av Postkassetjeneste
+            </summary>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Kontaktinformasjon">
+            <summary>
+                Kontaktinformasjon er Adresse informasjon knyttet til en Person for å kommunisere med person
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Kontaktinformasjon.Mobiltelefonnummer">
+            <summary>
+                Informasjon om en Person sitt Mobiltelefonnummer registrert i kontakt og reservasjonsregisteret.
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Kontaktinformasjon.Epostadresse">
+            <summary>
+                Informasjon om en Person sitt Epostadresse registrert i kontakt og reservasjonsregisteret.
+            </summary>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Mobiltelefonnummer">
+            <summary>
+                Informasjon om en Person sitt Mobiltelefonnummer registrert i kontakt og reservasjonsregisteret
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Mobiltelefonnummer.Nummer">
+            <summary>
+                Et internasjonalt mobiltelefonnummer.
+            </summary>
+            <remarks>
+                Et mobiltelefonnummer lagret i Digital kontaktregister har følgende format:
+                •En tekststreng på formatet: "^\\+?[- _0-9]+$"
+                •Minimum lengde : 8
+                •Maximum lengde : 20
+                •Tillatte tegn: 0-9 og eventuelt + som første karakter
+                I tillegg er det en ekstra validering av norske mobilnummer. Norske mobilnummer er definert som:
+                •nummeret starter på 0047,+47 eller er på 8 tegn
+                For disse mobiltelefonnummer er det følgende validering:
+                •første siffer (etter evt. landkode) er 9 eller 4
+                Dette er i henhold til Nummerplan E.164
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.Varslingsstatus">
+            <summary>
+                Varslingsstatus gir en tekstlig beskrivelse av om bruker har utgått kontaktinformasjon eller ikke, ihht
+                eForvaltningsforskriftens §32 andre ledd.
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.Personidentifikator">
+            <summary>
+                Identifikasjon av en person.
+            </summary>
+            <remarks>
+                personidentifikator er er enten et fødselsnummer et gyldig D-nummer.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.Reservasjon">
+            <summary>
+                Avgitt Forbehold i henhold til eForvaltningsforskriften. Standardverdi: NEI
+            </summary>
+            <remarks>
+                Reservasjon avgitt av Innbygger, brukt i henhold til eForvaltningsforskriften § 15 a.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.Status">
+            <summary>
+                Status gir en tekstlig beskrivelse av tilstand.
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.Kontaktinformasjon">
+            <summary>
+                Kontaktinformasjon er Adresse informasjon knyttet til en Person for å kommunisere med person.
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.SikkerDigitalPostAdresse">
+            <summary>
+                Adresse informasjon om Person sin Sikker DigitalPostKasse.
+            </summary>
+            <remarks>
+                SikkerDigitalPostAdresse er Innbygger sin adresse til Postkassen. Det inneholder nok informasjon til å adresse post
+                til Innbygger sin postkasse.
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Person.X509Sertifikat">
+            <summary>
+                Et X509 Sertifikat.
+            </summary>
+        </member>
+        <member name="T:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.SikkerDigitalPostAdresse">
+            <summary>
+                Adresse informasjon om Person sin Sikker DigitalPostKasse.
+            </summary>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.SikkerDigitalPostAdresse.Postkasseadresse">
+            <summary>
+                Adresse til en Innbygger sin Postkasse hos en Postkasseleverandør
+            </summary>
+            <remarks>
+                Dette er en unik adresse for en Person sin Postkasseadresse hos en Postkasseleverandør. Enten digipost eller eboks.
+                For definisjon av postkasseadressen hos Digipost se: https://www.digipost.no/plattform/felles/digipostadresser
+            </remarks>
+        </member>
+        <member name="P:Difi.Oppslagstjeneste.Klient.Domene.Entiteter.SikkerDigitalPostAdresse.PostkasseleverandørAdresse">
+            <summary>
+                Adresse til en leverandør av Postkassetjeneste
+            </summary>
+            <remarks>
+                Dette er en unik adresse for en leverandør, enten en Postkasseleverandør eller Utskrifts og forsendelsestjeneeste
+                leverandør.
+                Adressen brukt for adressering er Organisasjonsnummeret for leverandører
+            </remarks>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.SoapEnvelope12">
+            <summary>
+                http://www.w3.org/2003/05/soap-envelope
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.XmlSchemaInstance">
+            <summary>
+                http://www.w3.org/2001/XMLSchema-instance
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.XmlNameSpace">
+            <summary>
+                http://www.w3.org/XML/1998/namespace
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.OppslagstjenesteDefinisjon">
+            <summary>
+                http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.WssecuritySecext10">
+            <summary>
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.WssecuritySecext11">
+            <summary>
+                http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.WssecurityUtility10">
+            <summary>
+                http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.XmlDsig">
+            <summary>
+                http://www.w3.org/2000/09/xmldsig#
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.OppslagstjenesteMetadata">
+            <summary>
+                http://begrep.difi.no
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.Xenc">
+            <summary>
+                http://www.w3.org/2001/04/xmlenc#
+            </summary>
+        </member>
+        <member name="F:Difi.Oppslagstjeneste.Klient.Domene.Navnerom.XmlExcC14N">
+            <summary>
+                http://www.w3.org/2001/10/xml-exc-c14n#
+            </summary>
+        </member>
+    </members>
+</doc>

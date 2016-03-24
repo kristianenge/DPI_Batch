@@ -1,0 +1,1 @@
+C:\DotNetProjects\DPI_Batch\DPI_Batch\DPI_Batch.csproj;x86
