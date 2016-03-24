@@ -71,6 +71,7 @@ namespace OppslagstjenesteProxy
                     {
                         var signature = dtoPerson.X509Sertifikat.Export(X509ContentType.Cert);
                         p.X509CertificateRawdata = Convert.ToBase64String(signature);
+                        p.Certificate = new X509Certificate2(signature);
                     }
                 }
             }

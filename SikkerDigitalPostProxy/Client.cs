@@ -79,12 +79,16 @@ namespace SikkerDigitalPostProxy
             var mimeType = "";
             switch (file.Extension)
             {
-                case "pdf":
+                case ".pdf":
                     mimeType = "application/pdf";
                     break;
-                case "txt":
+                case ".txt":
                     mimeType = "plain/txt";
                     break;
+                default:
+                    person.BatchStatus = BatchStatus.ERROR;
+                    person.StatusMessage = "FileType not known. "+ file.Extension;
+                    return person;
             }
 
             var dokumentPakke = new Dokumentpakke(new Dokument(person.Subject, fileData, mimeType, "NO", file.Name));
