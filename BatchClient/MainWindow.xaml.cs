@@ -102,11 +102,12 @@ namespace BatchClient
         {
             var persons = DataGrid.ItemsSource as List<Person>;
 
-            var washedPersonList = await Client.WashPersonList(persons);
+            await Client.WashPersonList(persons);
 
             PersistCsv(persons);
-            DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = washedPersonList;
+            DataGrid.Items.Refresh();
+            /*DataGrid.ItemsSource = null;
+            DataGrid.ItemsSource = persons;*/
         }
 
         private void PersistCsv(IEnumerable<Person> persons)
@@ -134,8 +135,9 @@ namespace BatchClient
             }
 
             PersistCsv(persons);
-            DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = persons;
+            DataGrid.Items.Refresh();
+            /*DataGrid.ItemsSource = null;
+            DataGrid.ItemsSource = persons;*/
         }
 
         private void BtnCheckReceipt_Click(object sender, RoutedEventArgs e)
@@ -145,8 +147,9 @@ namespace BatchClient
             var persons = DataGrid.ItemsSource as List<Person>;
             client.HentKvitteringer(persons);
             PersistCsv(persons);
-            DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = persons;
+            DataGrid.Items.Refresh();
+            /*DataGrid.ItemsSource = null;
+            DataGrid.ItemsSource = persons;*/
         }
     }
 }

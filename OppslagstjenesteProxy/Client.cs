@@ -13,7 +13,8 @@ namespace OppslagstjenesteProxy
 {
     public static class Client
     {
-        public static async Task<List<Person>> WashPersonList(List<Person> persons)
+        public static async         Task
+WashPersonList(List<Person> persons)
         {
             var stringList =
                 (from item in persons
@@ -23,7 +24,7 @@ namespace OppslagstjenesteProxy
                     select r.SocialSecurityNumber).ToArray();
 
             if (stringList.Length < 1)
-                return persons;
+                return ;
 
             var oppslagstjenesteKonfigurasjon = new OppslagstjenesteKonfigurasjon(Miljø.FunksjoneltTestmiljø);
 
@@ -75,7 +76,6 @@ namespace OppslagstjenesteProxy
                     }
                 }
             }
-            return persons;
         }
 
         public static string ExportToString(X509Certificate cert)
