@@ -103,12 +103,19 @@ namespace BatchClient
         {
             var persons = DataGrid.ItemsSource as List<Person>;
 
-            await Client.WashPersonList(persons);
-
-            PersistCsv(persons);
-            DataGrid.Items.Refresh();
-            /*DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = persons;*/
+            try
+            {
+                await Client.WashPersonList(persons);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            finally
+            {
+                PersistCsv(persons);
+                DataGrid.Items.Refresh();
+            }
         }
 
         private void PersistCsv(IEnumerable<Person> persons)
@@ -131,11 +138,18 @@ namespace BatchClient
             {
                 if (persons[i].BatchStatus != BatchStatus.WASHED || persons[i].PersonStatus != PersonStatus.ACTIVE)
                     continue;
-                var updatedPerson = await client.Send(persons[i]);
-                persons[i] = updatedPerson;
+                try
+                {
+                    var updatedPerson = await client.Send(persons[i]);
+                    persons[i] = updatedPerson;
 
-                PersistCsv(persons);
-                DataGrid.Items.Refresh();
+                    PersistCsv(persons);
+                    DataGrid.Items.Refresh();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
             }
             
         }
@@ -155,6 +169,7 @@ namespace BatchClient
                 catch (Exception exception)
                 {
                     shouldContinue = false;
+                    MessageBox.Show(exception.Message);
                 }
                 finally
                 {
