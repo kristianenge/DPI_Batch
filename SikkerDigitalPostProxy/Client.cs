@@ -87,7 +87,7 @@ namespace SikkerDigitalPostProxy
                     break;
                 default:
                     person.BatchStatus = BatchStatus.ERROR;
-                    person.StatusMessage = "FileType not known. "+ file.Extension;
+                    person.StatusMessage = "FileType not known. " + file.Extension;
                     return person;
             }
 
