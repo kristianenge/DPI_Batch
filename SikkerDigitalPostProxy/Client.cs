@@ -145,24 +145,21 @@ namespace SikkerDigitalPostProxy
                 };
         }
 
-        public async Task HentKvitteringer(List<Person> persons)
+        public async Task<bool> HentKvitteringer(List<Person> persons)
         {
             var kvitteringsForespørsel = new Kvitteringsforespørsel(Prioritet, MpcId);
             Console.WriteLine(@" > Henter kvittering på kø '{0}'...", kvitteringsForespørsel.Mpc);
-
-            while (true)
-            {
+            
                 var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
                 
                 if (kvittering is TomKøKvittering)
                 {
-                    break;
+                   return false;
                 }
 
                 UpdatePersonWithReceipt(persons, kvittering);
                 await SDPClient.BekreftAsync((Forretningskvittering)kvittering);
-            }
-            
+            return true;
         }
 
         private void UpdatePersonWithReceipt(IEnumerable<Person> persons, Kvittering kvittering)

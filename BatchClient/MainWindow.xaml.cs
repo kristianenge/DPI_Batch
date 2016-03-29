@@ -145,9 +145,25 @@ namespace BatchClient
             var client = new SikkerDigitalPostProxy.Client("Posten Norge", "0400", "Oslo", "984661185",
                 "8702F5E55217EC88CF2CCBADAC290BB4312594AC");
             var persons = DataGrid.ItemsSource as List<Person>;
-            await client.HentKvitteringer(persons);
-            PersistCsv(persons);
-            DataGrid.Items.Refresh();
+            var shouldContinue = true;
+            while (shouldContinue)
+            {
+                try
+                {
+                    shouldContinue = await client.HentKvitteringer(persons);
+                }
+                catch (Exception exception)
+                {
+                    shouldContinue = false;
+                }
+                finally
+                {
+                    PersistCsv(persons);
+                    DataGrid.Items.Refresh();
+                }
+            }
+            
+            
         }
     }
 }
