@@ -86,7 +86,8 @@ namespace BatchClient
                         ? BatchStatus.NOT_COMPLETE
                         : (BatchStatus) Enum.Parse(typeof (BatchStatus), splittedLine[24]),
                     StatusMessage = splittedLine[25],
-                    MessageId = splittedLine[26]
+                    KonversasjonsId =
+                        string.IsNullOrEmpty(splittedLine[26]) ? (Guid?) null : Guid.Parse(splittedLine[26])
                 };
                 if (!string.IsNullOrEmpty(p.X509CertificateRawdata))
                 {
@@ -140,12 +141,12 @@ namespace BatchClient
             DataGrid.ItemsSource = persons;*/
         }
 
-        private void BtnCheckReceipt_Click(object sender, RoutedEventArgs e)
+        private async void BtnCheckReceipt_Click(object sender, RoutedEventArgs e)
         {
             var client = new SikkerDigitalPostProxy.Client("Posten Norge", "0400", "Oslo", "984661185",
                 "8702F5E55217EC88CF2CCBADAC290BB4312594AC");
             var persons = DataGrid.ItemsSource as List<Person>;
-            client.HentKvitteringer(persons);
+            await client.HentKvitteringer(persons);
             PersistCsv(persons);
             DataGrid.Items.Refresh();
             /*DataGrid.ItemsSource = null;

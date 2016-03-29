@@ -21,7 +21,8 @@ namespace SikkerDigitalPostProxy
 {
     public class Client
     {
-        private const string MpcId = "batchmpcId";
+        private const string MpcId = "DPIBatchKoe666";
+        private const Prioritet Prioritet = Difi.SikkerDigitalPost.Klient.Domene.Enums.Prioritet.Normal;
 
         public Client(string returNavn, string returPostnummer, string returPoststed, string orgNumberProcessor,
             string thumbprintProcessor)
@@ -45,7 +46,7 @@ namespace SikkerDigitalPostProxy
 
         public async Task<Person> Send(Person person)
         {
-            var senderIdentification = "Posten Norge";
+            var senderIdentification = "digipost";
             PostInfo postInfo = null;
             if (!person.ReservedForDigitallyDelivery)
             {
@@ -99,9 +100,10 @@ namespace SikkerDigitalPostProxy
                 Avsenderidentifikator = senderIdentification
             };
 
-            var forsendelse = new Forsendelse(avsender, postInfo, dokumentPakke, Prioritet.Normal, MpcId);
 
+            var forsendelse = new Forsendelse(avsender, postInfo, dokumentPakke, Prioritet, MpcId);
 
+            person.KonversasjonsId = forsendelse.KonversasjonsId;
             Kvittering transportkvittering = null;
             try
             {
@@ -125,7 +127,11 @@ namespace SikkerDigitalPostProxy
                 var feiletkvittering = (TransportFeiletKvittering) transportkvittering;
                 person.BatchStatus = BatchStatus.ERROR;
             }
-            person.MessageId = transportkvittering.MeldingsId;
+            Console.WriteLine("forsendelse konversjonsid:" + forsendelse.KonversasjonsId);
+            Console.WriteLine("transportkvittering id:" + transportkvittering.MeldingsId);
+            Console.WriteLine("transportkvittering ref-id:" + transportkvittering.ReferanseTilMeldingId);
+
+
             return person;
         }
 
@@ -139,39 +145,46 @@ namespace SikkerDigitalPostProxy
                 };
         }
 
-        public async void HentKvitteringer(List<Person> persons)
+        public async Task HentKvitteringer(List<Person> persons)
         {
-            var kvitteringsForespørsel = new Kvitteringsforespørsel(Prioritet.Prioritert, MpcId);
+            var kvitteringsForespørsel = new Kvitteringsforespørsel(Prioritet, MpcId);
             Console.WriteLine(@" > Henter kvittering på kø '{0}'...", kvitteringsForespørsel.Mpc);
 
             var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
 
-            while (true)
-            {
-                if (kvittering is TomKøKvittering)
-                {
-                    break;
-                }
 
-                UpdatePersonWithReceipt(persons, kvittering);
+            if (kvittering is TomKøKvittering)
+            {
+                return;
             }
+
+            UpdatePersonWithReceipt(persons, kvittering);
         }
 
-        private static void UpdatePersonWithReceipt(IEnumerable<Person> persons, Kvittering kvittering)
+        private async void UpdatePersonWithReceipt(IEnumerable<Person> persons, Kvittering kvittering)
         {
-            foreach (var person in persons.Where(person => person.MessageId == kvittering.MeldingsId))
+            Console.WriteLine("responsekvittering id:" + kvittering.MeldingsId);
+            Console.WriteLine("responsekvittering ref-id:" + kvittering.ReferanseTilMeldingId);
+            if (kvittering.GetType() == typeof (Leveringskvittering))
             {
-                if (kvittering is Feilmelding || kvittering is TransportFeiletKvittering)
+                foreach (
+                    var person in
+                        persons.Where(
+                            person => person.KonversasjonsId == ((Leveringskvittering) kvittering).KonversasjonsId))
                 {
-                    person.BatchStatus = BatchStatus.ERROR;
-                    person.StatusMessage = kvittering.GetType().ToString();
-                }
-                else
-                {
-                    person.BatchStatus = BatchStatus.SENT_WITH_RECEIPT;
-                    person.StatusMessage = kvittering.GetType().ToString();
+                    if (kvittering is Feilmelding || kvittering is TransportFeiletKvittering)
+                    {
+                        person.BatchStatus = BatchStatus.ERROR;
+                        person.StatusMessage = kvittering.GetType().ToString();
+                    }
+                    else
+                    {
+                        person.BatchStatus = BatchStatus.SENT_WITH_RECEIPT;
+                        person.StatusMessage = kvittering.GetType().ToString();
+                    }
                 }
             }
+            await SDPClient.BekreftAsync((Forretningskvittering) kvittering);
         }
     }
 }

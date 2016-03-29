@@ -128,8 +128,8 @@
                             <TextBlock Text="{Binding (models4:Person.StatusMessage) }" Grid.Row="17"
                                        Grid.Column="1" />
 
-                            <TextBlock FontWeight="Bold" Text="MessageId : " Grid.Row="18" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.MessageId) }" Grid.Row="18"
+                            <TextBlock FontWeight="Bold" Text="KonversasjonsId : " Grid.Row="18" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models4:Person.KonversasjonsId) }" Grid.Row="18"
                                        Grid.Column="1" />
 
                         </Grid>

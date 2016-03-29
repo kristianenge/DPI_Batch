@@ -10,7 +10,7 @@ namespace BatchModel.Models
             BatchStatus = BatchStatus.NOT_COMPLETE;
         }
 
-        public string MessageId { get; set; }
+        public Guid? KonversasjonsId { get; set; }
 
         public string CustomerId { get; set; }
         public string SocialSecurityNumber { get; set; }
@@ -52,7 +52,7 @@ namespace BatchModel.Models
                    AccountNumber + ";" + AmountDecimal + ";" + DueDate + ";" + ReservedForDigitallyDelivery + ";" +
                    SikkerDigitalPostAdresse + ";" + X509CertificateRawdata + ";" + RecieverProcessorAccountNumber + ";" +
                    PersonStatus + ";" +
-                   BatchStatus + ";" + StatusMessage + ";" + MessageId;
+                   BatchStatus + ";" + StatusMessage + ";" + KonversasjonsId;
         }
     }
 }
