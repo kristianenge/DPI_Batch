@@ -150,18 +150,22 @@ namespace SikkerDigitalPostProxy
             var kvitteringsForespørsel = new Kvitteringsforespørsel(Prioritet, MpcId);
             Console.WriteLine(@" > Henter kvittering på kø '{0}'...", kvitteringsForespørsel.Mpc);
 
-            var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
-
-
-            if (kvittering is TomKøKvittering)
+            while (true)
             {
-                return;
-            }
+                var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
+                
+                if (kvittering is TomKøKvittering)
+                {
+                    break;
+                }
 
-            UpdatePersonWithReceipt(persons, kvittering);
+                UpdatePersonWithReceipt(persons, kvittering);
+                await SDPClient.BekreftAsync((Forretningskvittering)kvittering);
+            }
+            
         }
 
-        private async void UpdatePersonWithReceipt(IEnumerable<Person> persons, Kvittering kvittering)
+        private void UpdatePersonWithReceipt(IEnumerable<Person> persons, Kvittering kvittering)
         {
             Console.WriteLine("responsekvittering id:" + kvittering.MeldingsId);
             Console.WriteLine("responsekvittering ref-id:" + kvittering.ReferanseTilMeldingId);
@@ -184,7 +188,6 @@ namespace SikkerDigitalPostProxy
                     }
                 }
             }
-            await SDPClient.BekreftAsync((Forretningskvittering) kvittering);
         }
     }
 }
