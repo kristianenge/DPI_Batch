@@ -133,12 +133,11 @@ namespace BatchClient
                     continue;
                 var updatedPerson = await client.Send(persons[i]);
                 persons[i] = updatedPerson;
-            }
 
-            PersistCsv(persons);
-            DataGrid.Items.Refresh();
-            /*DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = persons;*/
+                PersistCsv(persons);
+                DataGrid.Items.Refresh();
+            }
+            
         }
 
         private async void BtnCheckReceipt_Click(object sender, RoutedEventArgs e)
@@ -149,8 +148,6 @@ namespace BatchClient
             await client.HentKvitteringer(persons);
             PersistCsv(persons);
             DataGrid.Items.Refresh();
-            /*DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = persons;*/
         }
     }
 }
