@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BatchConfig.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\BatchStatus.cs" />
     <Compile Include="Models\PersonStatus.cs" />

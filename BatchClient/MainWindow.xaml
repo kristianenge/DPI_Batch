@@ -4,10 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:models="clr-namespace:BatchModel.Models;assembly=BatchModel"
-        xmlns:models1="clr-namespace:BatchModel.Models;assembly=BatchModel"
-        xmlns:models2="clr-namespace:BatchModel.Models;assembly=BatchModel"
-        xmlns:models3="clr-namespace:BatchModel.Models;assembly=BatchModel"
-        xmlns:models4="clr-namespace:BatchModel.Models;assembly=BatchModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="860" Width="1440">
     <Grid>
@@ -66,70 +62,70 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock FontWeight="Bold" Text="PostalNumber : " Grid.Row="0" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.PostalNumber) }" Grid.Row="0" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.PostalNumber) }" Grid.Row="0" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="PostalPlace : " Grid.Row="1" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.PostalPlace) }" Grid.Row="1" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.PostalPlace) }" Grid.Row="1" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="AddressLine1 : " Grid.Row="2" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.AddressLine1) }" Grid.Row="2" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.AddressLine1) }" Grid.Row="2" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="AddressLine2 : " Grid.Row="3" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.AddressLine2) }" Grid.Row="3" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.AddressLine2) }" Grid.Row="3" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="MobileNumber : " Grid.Row="4" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.MobileNumber) }" Grid.Row="4" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.MobileNumber) }" Grid.Row="4" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Email : " Grid.Row="5" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.Email) }" Grid.Row="5" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.Email) }" Grid.Row="5" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Subject : " Grid.Row="6" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models1:Person.Subject) }" Grid.Row="6" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.Subject) }" Grid.Row="6" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="FileName : " Grid.Row="7" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models2:Person.FilePathAndFileName) }" Grid.Row="7"
+                            <TextBlock Text="{Binding (models:Person.FilePathAndFileName) }" Grid.Row="7"
                                        Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Attachment1 : " Grid.Row="8" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models3:Person.Attachment1) }" Grid.Row="8" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.Attachment1) }" Grid.Row="8" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Attachment2 : " Grid.Row="8" Grid.Column="2" />
-                            <TextBlock Text="{Binding (models3:Person.Attachment2) }" Grid.Row="8" Grid.Column="3" />
+                            <TextBlock Text="{Binding (models:Person.Attachment2) }" Grid.Row="8" Grid.Column="3" />
 
                             <TextBlock FontWeight="Bold" Text="OrganizationNumber : " Grid.Row="9" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.OrganizationNumber) }" Grid.Row="9"
+                            <TextBlock Text="{Binding (models:Person.OrganizationNumber) }" Grid.Row="9"
                                        Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Country : " Grid.Row="10" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.Country) }" Grid.Row="10" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.Country) }" Grid.Row="10" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="Kid : " Grid.Row="11" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.Kid) }" Grid.Row="11" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.Kid) }" Grid.Row="11" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="AccountNumber : " Grid.Row="12" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.AccountNumber) }" Grid.Row="12" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.AccountNumber) }" Grid.Row="12" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="AmountDecimal : " Grid.Row="13" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.AmountDecimal) }" Grid.Row="13" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.AmountDecimal) }" Grid.Row="13" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="DueDate : " Grid.Row="14" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.DueDate) }" Grid.Row="14" Grid.Column="1" />
+                            <TextBlock Text="{Binding (models:Person.DueDate) }" Grid.Row="14" Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="X509CertificateRawdata : " Grid.Row="15" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.X509CertificateRawdata) }" Grid.Row="15"
+                            <TextBlock Text="{Binding (models:Person.X509CertificateRawdata) }" Grid.Row="15"
                                        Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="RecieverProcessorAccountNumber : " Grid.Row="16"
                                        Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.RecieverProcessorAccountNumber) }" Grid.Row="16"
+                            <TextBlock Text="{Binding (models:Person.RecieverProcessorAccountNumber) }" Grid.Row="16"
                                        Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="StatusMessage : " Grid.Row="17" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.StatusMessage) }" Grid.Row="17"
+                            <TextBlock Text="{Binding (models:Person.StatusMessage) }" Grid.Row="17"
                                        Grid.Column="1" />
 
                             <TextBlock FontWeight="Bold" Text="KonversasjonsId : " Grid.Row="18" Grid.Column="0" />
-                            <TextBlock Text="{Binding (models4:Person.KonversasjonsId) }" Grid.Row="18"
+                            <TextBlock Text="{Binding (models:Person.KonversasjonsId) }" Grid.Row="18"
                                        Grid.Column="1" />
 
                         </Grid>
@@ -138,6 +134,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
+        <Button x:Name="BtnConfig" Content="Config" HorizontalAlignment="Left" Margin="1322,5,0,0" VerticalAlignment="Top" Width="75" Click="BtnConfig_Click"/>
 
 
     </Grid>

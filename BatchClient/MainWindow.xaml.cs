@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -15,9 +16,20 @@ namespace BatchClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        public BatchConfig Config;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Config = new BatchConfig
+            {
+                ReturNavn = "Posten Norge",
+                ReturPostnummer = "0400",
+                ReturPoststed = "Oslo",
+                OrgNummerAvsender = "984661185",
+                ThumbprintAvsenderCertificate = "8702F5E55217EC88CF2CCBADAC290BB4312594AC"
+            };
         }
 
         public string FileName { get; set; }
@@ -105,7 +117,7 @@ namespace BatchClient
 
             try
             {
-                await Client.WashPersonList(persons);
+                await OppslagstjenesteClient.WashPersonList(persons);
             }
             catch (Exception exception)
             {
@@ -131,8 +143,7 @@ namespace BatchClient
 
         private async void BtnSend_OnClick(object sender, RoutedEventArgs e)
         {
-            var client = new SikkerDigitalPostProxy.Client("Posten Norge", "0400", "Oslo", "984661185",
-                "8702F5E55217EC88CF2CCBADAC290BB4312594AC");
+            var client = new SikkerDigitalPostProxy.Client(Config);
             var persons = DataGrid.ItemsSource as List<Person>;
             for (var i = persons.Count - 1; i >= 0; i--)
             {
@@ -156,8 +167,7 @@ namespace BatchClient
 
         private async void BtnCheckReceipt_Click(object sender, RoutedEventArgs e)
         {
-            var client = new SikkerDigitalPostProxy.Client("Posten Norge", "0400", "Oslo", "984661185",
-                "8702F5E55217EC88CF2CCBADAC290BB4312594AC");
+            var client = new SikkerDigitalPostProxy.Client(Config);
             var persons = DataGrid.ItemsSource as List<Person>;
             var shouldContinue = true;
             while (shouldContinue)
@@ -179,6 +189,19 @@ namespace BatchClient
             }
             
             
+        }
+
+        private void BtnConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration config = new Configuration(Config);
+            
+            config.Show();
+            config.Closing += ConfigOnClosing;
+        }
+
+        private void ConfigOnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            Config = ((Configuration) sender).BatchConfig;
         }
     }
 }

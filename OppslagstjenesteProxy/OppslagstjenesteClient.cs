@@ -11,7 +11,7 @@ using Difi.Oppslagstjeneste.Klient.Domene.Entiteter.Enums;
 
 namespace OppslagstjenesteProxy
 {
-    public static class Client
+    public static class OppslagstjenesteClient
     {
         public static async Task
             WashPersonList(List<Person> persons)

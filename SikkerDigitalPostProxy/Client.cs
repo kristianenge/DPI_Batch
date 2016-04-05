@@ -21,8 +21,24 @@ namespace SikkerDigitalPostProxy
 {
     public class Client
     {
-        private const string MpcId = "DPIBatchKoe666";
+        private const string MpcId = "DPIBatchKoe";
         private const Prioritet Prioritet = Difi.SikkerDigitalPost.Klient.Domene.Enums.Prioritet.Normal;
+
+        public Client(BatchConfig config)
+        {
+            ReturNavn = config.ReturNavn;
+            ReturPostNummer = config.ReturPostnummer;
+            ReturPoststed = config.ReturPoststed;
+            var klientkonfigurasjon =
+                new Klientkonfigurasjon(config.Miljø == BatchConfig.BatchMiljø.TEST
+                    ? Miljø.FunksjoneltTestmiljø
+                    : Miljø.Produksjonsmiljø);
+            InitializeLog(klientkonfigurasjon);
+            SDPClient =
+                new SikkerDigitalPostKlient(
+                    new Databehandler(config.OrgNummerAvsender, config.ThumbprintAvsenderCertificate),
+                    klientkonfigurasjon);
+        }
 
         public Client(string returNavn, string returPostnummer, string returPoststed, string orgNumberProcessor,
             string thumbprintProcessor)
@@ -149,16 +165,16 @@ namespace SikkerDigitalPostProxy
         {
             var kvitteringsForespørsel = new Kvitteringsforespørsel(Prioritet, MpcId);
             Console.WriteLine(@" > Henter kvittering på kø '{0}'...", kvitteringsForespørsel.Mpc);
-            
-                var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
-                
-                if (kvittering is TomKøKvittering)
-                {
-                   return false;
-                }
 
-                UpdatePersonWithReceipt(persons, kvittering);
-                await SDPClient.BekreftAsync((Forretningskvittering)kvittering);
+            var kvittering = await SDPClient.HentKvitteringAsync(kvitteringsForespørsel);
+
+            if (kvittering is TomKøKvittering)
+            {
+                return false;
+            }
+
+            UpdatePersonWithReceipt(persons, kvittering);
+            await SDPClient.BekreftAsync((Forretningskvittering) kvittering);
             return true;
         }
 
