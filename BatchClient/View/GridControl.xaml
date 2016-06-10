@@ -1,0 +1,143 @@
+﻿<Page x:Class="BatchClient.View.GridControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:models="clr-namespace:BatchModel.Models;assembly=BatchModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="GridControl">  
+
+    <Grid>
+        <Button x:Name="BtnRawdata" Content="Choose rawdata" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="BtnRawdataButtonClick" Margin="10,0,0,0" />
+        <Button x:Name="BtnOppslagstjeneste" Content="Wash list" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="BtnOppslagstjeneste_Click" Margin="122,0,0,0" />
+        <Button x:Name="BtnSend" Content="Send" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="true"
+                Click="BtnSend_OnClick" Margin="193,0,0,0" />
+        <Button x:Name="BtnCheckReceipt" Content="Receipt" HorizontalAlignment="Left" Margin="257,0,0,0"
+                VerticalAlignment="Top" Width="75" Click="BtnCheckReceipt_Click" />
+        <DataGrid Name="DataGrid" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
+                  Margin="0,51,0,21">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="200" Header="CustomerId" Binding="{Binding CustomerId}" />
+                <DataGridTextColumn Width="200" Header="Full name" Binding="{Binding FullName}" />
+                <DataGridTextColumn Width="200" Header="SocialSecurityNumber" Binding="{Binding SocialSecurityNumber}" />
+                <DataGridTextColumn Width="200" Header="ReservedForDigitallyDelivery"
+                                    Binding="{Binding ReservedForDigitallyDelivery}" />
+                <DataGridTextColumn Width="200" Header="ReservedForDigitallyDelivery"
+                                    Binding="{Binding SikkerDigitalPostAdresse}" />
+                <DataGridTextColumn Width="200" Header="PersonStatus" Binding="{Binding PersonStatus}" />
+                <DataGridTextColumn Width="200" Header="BatchStatus" Binding="{Binding BatchStatus}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+
+                    <DockPanel Background="GhostWhite">
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock FontWeight="Bold" Text="PostalNumber : " Grid.Row="0" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.PostalNumber) }" Grid.Row="0" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="PostalPlace : " Grid.Row="1" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.PostalPlace) }" Grid.Row="1" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="AddressLine1 : " Grid.Row="2" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.AddressLine1) }" Grid.Row="2" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="AddressLine2 : " Grid.Row="3" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.AddressLine2) }" Grid.Row="3" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="MobileNumber : " Grid.Row="4" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.MobileNumber) }" Grid.Row="4" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Email : " Grid.Row="5" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.Email) }" Grid.Row="5" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Subject : " Grid.Row="6" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.Subject) }" Grid.Row="6" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="FileName : " Grid.Row="7" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.FilePathAndFileName) }" Grid.Row="7"
+                                       Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Attachment1 : " Grid.Row="8" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.Attachment1) }" Grid.Row="8" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Attachment2 : " Grid.Row="8" Grid.Column="2" />
+                            <TextBlock Text="{Binding (models:Person.Attachment2) }" Grid.Row="8" Grid.Column="3" />
+
+                            <TextBlock FontWeight="Bold" Text="OrganizationNumber : " Grid.Row="9" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.OrganizationNumber) }" Grid.Row="9"
+                                       Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Country : " Grid.Row="10" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.Country) }" Grid.Row="10" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="Kid : " Grid.Row="11" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.Kid) }" Grid.Row="11" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="AccountNumber : " Grid.Row="12" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.AccountNumber) }" Grid.Row="12" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="AmountDecimal : " Grid.Row="13" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.AmountDecimal) }" Grid.Row="13" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="DueDate : " Grid.Row="14" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.DueDate) }" Grid.Row="14" Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="X509CertificateRawdata : " Grid.Row="15" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.X509CertificateRawdata) }" Grid.Row="15"
+                                       Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="RecieverProcessorAccountNumber : " Grid.Row="16"
+                                       Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.RecieverProcessorAccountNumber) }" Grid.Row="16"
+                                       Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="StatusMessage : " Grid.Row="17" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.StatusMessage) }" Grid.Row="17"
+                                       Grid.Column="1" />
+
+                            <TextBlock FontWeight="Bold" Text="KonversasjonsId : " Grid.Row="18" Grid.Column="0" />
+                            <TextBlock Text="{Binding (models:Person.KonversasjonsId) }" Grid.Row="18"
+                                       Grid.Column="1" />
+
+                        </Grid>
+
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        
+
+
+    </Grid>
+</Page>
